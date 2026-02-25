@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carrito de Compras</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./css/style.css" />
+
+  <!-- Fuente (opcional, pero se ve pro) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Top bar -->
+  <header class="header">
+    <div class="container header__inner">
+      <div class="brand">
+        <div class="brand__logo" aria-hidden="true">🛒</div>
+        <div class="brand__text">
+          <h1 class="brand__title">CarritoDeCompras</h1>
+          <p class="brand__subtitle">Demo UI (HTML + CSS)</p>
+        </div>
+      </div>
+
+      <div class="header__actions">
+        <div class="search">
+          <input id="searchInput" class="search__input" type="search" placeholder="Buscar productos..." autocomplete="off">
+          <button id="searchBtn" class="btn btn--ghost" type="button">Buscar</button>
+        </div>
+
+        <button id="openCartBtn" class="btn btn--primary" type="button">
+          Ver carrito
+          <span id="cartCount" class="badge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="container main">
+    <!-- Left: Products -->
+    <section class="products">
+      <div class="section__head">
+        <h2 class="section__title">Productos</h2>
+
+        <div class="filters">
+          <select id="categorySelect" class="select">
+            <option value="all">Todas las categorías</option>
+            <option value="tech">Tecnología</option>
+            <option value="home">Hogar</option>
+            <option value="food">Alimentos</option>
+          </select>
+
+          <select id="sortSelect" class="select">
+            <option value="featured">Destacados</option>
+            <option value="priceAsc">Precio: menor a mayor</option>
+            <option value="priceDesc">Precio: mayor a menor</option>
+            <option value="nameAsc">Nombre: A → Z</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Grid -->
+      <div id="productGrid" class="grid">
+        <!-- Card 1 -->
+        <article class="card product" data-id="p1" data-category="tech">
+          <div class="product__media">
+            <div class="product__tag">Nuevo</div>
+            <div class="product__img" aria-hidden="true">📱</div>
+          </div>
+
+          <div class="product__body">
+            <h3 class="product__name">Audífonos Wireless</h3>
+            <p class="product__desc">Sonido nítido, batería 20h, estuche compacto.</p>
+
+            <div class="product__meta">
+              <span class="price">$29.99</span>
+              <span class="stock">Stock: <strong id="stock-p1">12</strong></span>
+            </div>
+
+            <div class="product__actions">
+              <button class="btn btn--secondary" type="button" data-action="details">Detalles</button>
+              <button class="btn btn--primary" type="button" data-action="add">Agregar</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="card product" data-id="p2" data-category="home">
+          <div class="product__media">
+            <div class="product__tag product__tag--alt">Top</div>
+            <div class="product__img" aria-hidden="true">🪴</div>
+          </div>
+
+          <div class="product__body">
+            <h3 class="product__name">Planta Decorativa</h3>
+            <p class="product__desc">Ideal para escritorio, maceta incluida.</p>
+
+            <div class="product__meta">
+              <span class="price">$14.50</span>
+              <span class="stock">Stock: <strong id="stock-p2">8</strong></span>
+            </div>
+
+            <div class="product__actions">
+              <button class="btn btn--secondary" type="button" data-action="details">Detalles</button>
+              <button class="btn btn--primary" type="button" data-action="add">Agregar</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="card product" data-id="p3" data-category="food">
+          <div class="product__media">
+            <div class="product__tag product__tag--success">Oferta</div>
+            <div class="product__img" aria-hidden="true">🍫</div>
+          </div>
+
+          <div class="product__body">
+            <h3 class="product__name">Chocolate</h3>
+            <p class="product__desc">Barra 70% cacao, sabor intenso.</p>
+
+            <div class="product__meta">
+              <span class="price">$3.25</span>
+              <span class="stock">Stock: <strong id="stock-p3">20</strong></span>
+            </div>
+
+            <div class="product__actions">
+              <button class="btn btn--secondary" type="button" data-action="details">Detalles</button>
+              <button class="btn btn--primary" type="button" data-action="add">Agregar</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Right: Cart -->
+    <aside id="cartPanel" class="cart card" aria-label="Carrito">
+      <div class="cart__head">
+        <h2 class="section__title">Tu carrito</h2>
+        <button id="closeCartBtn" class="btn btn--ghost btn--icon" type="button" aria-label="Cerrar carrito">✕</button>
+      </div>
+
+      <div class="cart__content">
+        <!-- Empty state -->
+        <div id="cartEmpty" class="empty">
+          <div class="empty__icon" aria-hidden="true">🧺</div>
+          <p class="empty__title">Tu carrito está vacío</p>
+          <p class="empty__text">Agrega productos para verlos aquí.</p>
+        </div>
+
+        <!-- Items list (JS llenará esto) -->
+        <ul id="cartItems" class="cart__items" hidden>
+          <!--
+            <li class="cartItem">
+              ...
+            </li>
+          -->
+        </ul>
+      </div>
+
+      <div class="cart__footer">
+        <div class="summary">
+          <div class="summary__row">
+            <span>Subtotal</span>
+            <strong id="subtotal">$0.00</strong>
+          </div>
+          <div class="summary__row">
+            <span>Envío</span>
+            <strong id="shipping">$0.00</strong>
+          </div>
+          <div class="summary__row summary__row--total">
+            <span>Total</span>
+            <strong id="total">$0.00</strong>
+          </div>
+        </div>
+
+        <div class="cart__buttons">
+          <button id="clearCartBtn" class="btn btn--secondary" type="button">Vaciar</button>
+          <button id="checkoutBtn" class="btn btn--primary" type="button">Finalizar compra</button>
+        </div>
+
+        <p class="hint">
+          * El cálculo real del total y el descuento/inventario se conecta con JavaScript.
+        </p>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Modal -->
+  <dialog id="modal" class="modal">
+    <div class="modal__card">
+      <div class="modal__head">
+        <h3 id="modalTitle" class="modal__title">Título</h3>
+        <button id="modalClose" class="btn btn--ghost btn--icon" type="button" aria-label="Cerrar">✕</button>
+      </div>
+
+      <div id="modalBody" class="modal__body">
+        <p>Contenido del modal...</p>
+      </div>
+
+      <div class="modal__footer">
+        <button id="modalOk" class="btn btn--primary" type="button">Ok</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- JS (más adelante lo llenamos) -->
+  <script src="./js/app.js"></script>
+</body>
+</html>
