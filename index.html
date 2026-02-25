@@ -8,7 +8,7 @@
   <!-- CSS -->
   <link rel="stylesheet" href="./css/style.css" />
 
-  <!-- Fuente (opcional, pero se ve pro) -->
+  <!-- Fuente -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -42,7 +42,7 @@
 
   <!-- Main -->
   <main class="container main">
-    <!-- Left: Products -->
+    <!-- Productoss -->
     <section class="products">
       <div class="section__head">
         <h2 class="section__title">Productos</h2>
@@ -137,7 +137,7 @@
       </div>
     </section>
 
-    <!-- Right: Cart -->
+    <!-- Carrito -->
     <aside id="cartPanel" class="cart card" aria-label="Carrito">
       <div class="cart__head">
         <h2 class="section__title">Tu carrito</h2>
@@ -145,14 +145,14 @@
       </div>
 
       <div class="cart__content">
-        <!-- Empty state -->
+        <!-- Carrito Vacio -->
         <div id="cartEmpty" class="empty">
           <div class="empty__icon" aria-hidden="true">🧺</div>
           <p class="empty__title">Tu carrito está vacío</p>
           <p class="empty__text">Agrega productos para verlos aquí.</p>
         </div>
 
-        <!-- Items list (JS llenará esto) -->
+        <!-- Lista de Items -->
         <ul id="cartItems" class="cart__items" hidden>
           <!--
             <li class="cartItem">
@@ -208,7 +208,7 @@
     </div>
   </dialog>
 
-  <!-- JS (más adelante lo llenamos) -->
+  <!-- JS -->
   <script src="./js/app.js"></script>
 </body>
 </html>
