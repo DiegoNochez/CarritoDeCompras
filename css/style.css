@@ -154,6 +154,11 @@ body{
   gap: var(--gap);
 }
 
+/* Asegurarse que le hidden funcione bien */
+[hidden] {
+  display: none !important;
+}
+
 .product{
   overflow: hidden;
   display: grid;
