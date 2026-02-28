@@ -457,3 +457,148 @@ body{
   }
   .select{ width: 100%; }
 }
+
+/* MEJORA DE DROPDOWNS Y MODALS*/
+
+/* =========================
+   Dropdowns / Selects
+========================= */
+.filters {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.selectWrap {
+  position: relative;
+  display: inline-block;
+  min-width: 220px;
+}
+
+.select {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.92);
+  padding: 12px 44px 12px 14px;
+  border-radius: 14px;
+  font-weight: 800;
+  letter-spacing: .2px;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0 12px 26px rgba(0,0,0,0.28);
+  transition: transform .12s ease, background .12s ease, border-color .12s ease;
+}
+
+.select:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.18);
+  transform: translateY(-1px);
+}
+
+.select:focus {
+  border-color: rgba(110,231,255,0.55);
+  box-shadow: 0 0 0 4px rgba(110,231,255,0.18), 0 12px 26px rgba(0,0,0,0.28);
+}
+
+/* Flecha custom */
+.selectWrap::after {
+  content: "▾";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: rgba(255,255,255,0.75);
+  font-size: 14px;
+  font-weight: 900;
+}
+
+/* Nota: el dropdown “lista” es nativo, esto ayuda en Chrome/Edge */
+select option {
+  background: #0b1220;
+  color: rgba(255,255,255,0.92);
+}
+
+/* =========================
+   Modal (dialog)
+========================= */
+dialog.modal {
+  border: none;
+  padding: 0;
+  background: transparent;
+  width: min(720px, calc(100vw - 26px));
+}
+
+dialog.modal::backdrop {
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(7px);
+}
+
+/* card del modal */
+.modal__card {
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background:
+    radial-gradient(1200px 500px at 10% -10%, rgba(110,231,255,0.12), transparent 55%),
+    rgba(10, 16, 30, 0.92);
+  color: rgba(255,255,255,0.92);
+  box-shadow: 0 30px 90px rgba(0,0,0,0.60);
+  overflow: hidden;
+  transform: translateY(6px);
+  opacity: 0;
+  animation: modalIn .16s ease forwards;
+}
+
+@keyframes modalIn {
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 18px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+
+.modal__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0.2px;
+}
+
+.modal__body {
+  padding: 16px 18px;
+  color: rgba(255,255,255,0.80);
+  line-height: 1.55;
+}
+
+.modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 14px 18px 18px;
+  border-top: 1px solid rgba(255,255,255,0.10);
+}
+
+/* Botón X más “premium” sin cambiar HTML */
+.modal__head .btn--icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  transition: transform .12s ease, background .12s ease, border-color .12s ease;
+}
+.modal__head .btn--icon:hover {
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.10);
+  border-color: rgba(255,255,255,0.18);
+}
