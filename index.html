@@ -56,6 +56,7 @@
           </select>
 
           <select id="sortSelect" class="select">
+            <option value="featuredOnly">Featured only</option>
             <option value="featured">Destacados</option>
             <option value="priceAsc">Precio: menor a mayor</option>
             <option value="priceDesc">Precio: mayor a menor</option>
@@ -64,77 +65,8 @@
         </div>
       </div>
 
-      <!-- Grid -->
-      <div id="productGrid" class="grid">
-        <!-- Card 1 -->
-        <article class="card product" data-id="p1" data-category="tech">
-          <div class="product__media">
-            <div class="product__tag">Nuevo</div>
-            <div class="product__img" aria-hidden="true">📱</div>
-          </div>
-
-          <div class="product__body">
-            <h3 class="product__name">Audífonos Wireless</h3>
-            <p class="product__desc">Sonido nítido, batería 20h, estuche compacto.</p>
-
-            <div class="product__meta">
-              <span class="price">$29.99</span>
-              <span class="stock">Stock: <strong id="stock-p1">12</strong></span>
-            </div>
-
-            <div class="product__actions">
-              <button class="btn btn--secondary" type="button" data-action="details">Detalles</button>
-              <button class="btn btn--primary" type="button" data-action="add">Agregar</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- Card 2 -->
-        <article class="card product" data-id="p2" data-category="home">
-          <div class="product__media">
-            <div class="product__tag product__tag--alt">Top</div>
-            <div class="product__img" aria-hidden="true">🪴</div>
-          </div>
-
-          <div class="product__body">
-            <h3 class="product__name">Planta Decorativa</h3>
-            <p class="product__desc">Ideal para escritorio, maceta incluida.</p>
-
-            <div class="product__meta">
-              <span class="price">$14.50</span>
-              <span class="stock">Stock: <strong id="stock-p2">8</strong></span>
-            </div>
-
-            <div class="product__actions">
-              <button class="btn btn--secondary" type="button" data-action="details">Detalles</button>
-              <button class="btn btn--primary" type="button" data-action="add">Agregar</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- Card 3 -->
-        <article class="card product" data-id="p3" data-category="food">
-          <div class="product__media">
-            <div class="product__tag product__tag--success">Oferta</div>
-            <div class="product__img" aria-hidden="true">🍫</div>
-          </div>
-
-          <div class="product__body">
-            <h3 class="product__name">Chocolate</h3>
-            <p class="product__desc">Barra 70% cacao, sabor intenso.</p>
-
-            <div class="product__meta">
-              <span class="price">$3.25</span>
-              <span class="stock">Stock: <strong id="stock-p3">20</strong></span>
-            </div>
-
-            <div class="product__actions">
-              <button class="btn btn--secondary" type="button" data-action="details">Detalles</button>
-              <button class="btn btn--primary" type="button" data-action="add">Agregar</button>
-            </div>
-          </div>
-        </article>
-      </div>
+     <!-- Grid -->
+      <div id="productGrid" class="grid"></div>
     </section>
 
     <!-- Carrito -->

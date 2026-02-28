@@ -1,12 +1,13 @@
 class Product {
-  constructor(id, name, price, stock, category, description, emoji, tag, tagStyle) {
+  constructor(id, name, price, stock, category, description, image, tag, tagStyle) {
     this.id = id;
     this.name = name;
     this.price = price;
     this.stock = stock;
     this.category = category;
     this.description = description;
-    this.emoji = emoji;
+
+    this.image = image;
     this.tag = tag;
     this.tagStyle = tagStyle;
   }
