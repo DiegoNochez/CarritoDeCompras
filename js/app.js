@@ -254,31 +254,38 @@ document.addEventListener("DOMContentLoaded", () => {
     syncStockUI();
   }
 
-  function checkout() {
-    if (!cart.items.length) {
-      openModal("Carrito vacío", "<p>Agrega productos antes de finalizar compra.</p>");
-      return;
-    }
-
-    const subtotal = cart.getSubtotal();
-    const shipping = cart.getShipping();
-    const total = cart.getTotal();
-
-    openModal(
-      "Compra realizada ✅",
-      `
-        <p>Gracias por tu compra.</p>
-        <p><strong>Subtotal:</strong> $${subtotal.toFixed(2)}</p>
-        <p><strong>Shipping:</strong> $${shipping.toFixed(2)}</p>
-        <p><strong>Total:</strong> $${total.toFixed(2)}</p>
-      `
-    );
-
-    cart.clear();
-    persistAll();
-    renderCart();
-    syncStockUI();
+function checkout() {
+  if (!cart.items.length) {
+    openModal("Carrito vacío", "<p>Agrega productos antes de finalizar compra.</p>");
+    return;
   }
+
+  const subtotal = cart.getSubtotal();
+  const shipping = cart.getShipping();
+  const total = cart.getTotal();
+
+  openModal(
+    "Compra realizada ✅",
+    `
+      <p>Gracias por tu compra.</p>
+      <p><strong>Subtotal:</strong> $${subtotal.toFixed(2)}</p>
+      <p><strong>Shipping:</strong> $${shipping.toFixed(2)}</p>
+      <p><strong>Total:</strong> $${total.toFixed(2)}</p>
+    `
+  );
+
+  // ✅ AQUÍ se descuenta el stock (compra real)
+  cart.items.forEach((item) => {
+    item.product.decreaseStock(item.qty);
+  });
+
+  // ✅ vaciar carrito
+  cart.items = [];
+
+  persistAll();
+  renderCart();
+  syncStockUI();
+}
 
   // ====== Events ======
   gridEl.addEventListener("click", (e) => {

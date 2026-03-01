@@ -49,58 +49,68 @@ class Cart {
     return this.items.find(item => item.product.id === productId) || null;
   }
 
+  // Cantidad ya reservada en carrito para ese producto
+  getQtyInCart(productId) {
+    const it = this.findItem(productId);
+    return it ? Number(it.qty) : 0;
+  }
+
+  // Stock disponible REAL (stock del producto - lo que ya tienes en carrito)
+  getAvailable(product) {
+    const inCart = this.getQtyInCart(product.id);
+    return Number(product.stock) - inCart;
+  }
+
   add(product, qty = 1) {
-    if (!product.isAvailable()) {
-      alert(product.name + " esta agotado");
+    qty = Number(qty) || 1;
+    if (qty <= 0) return;
+
+    const available = this.getAvailable(product);
+    if (available <= 0) {
+      alert(product.name + " está agotado");
       return;
     }
 
-    if (qty > product.stock) {
-      alert("Solo hay " + product.stock + " unidades de " + product.name);
+    if (qty > available) {
+      alert("Solo hay " + available + " unidades disponibles de " + product.name);
       return;
     }
 
-    var existing = this.findItem(product.id);
-
+    const existing = this.findItem(product.id);
     if (existing) {
       existing.qty += qty;
     } else {
       this.items.push(new CartItem(product, qty));
     }
-
-    product.decreaseStock(qty);
   }
 
   remove(productId) {
-    var item = this.findItem(productId);
-    if (!item) return;
-
-    item.product.increaseStock(item.qty);
     this.items = this.items.filter(i => i.product.id !== productId);
   }
 
   updateQty(productId, newQty) {
-    var item = this.findItem(productId);
+    const item = this.findItem(productId);
     if (!item) return;
 
-    var diff = newQty - item.qty;
+    newQty = Number(newQty);
+    if (!Number.isFinite(newQty)) return;
 
-    if (diff > 0 && diff > item.product.stock) {
-      alert("No hay suficiente stock");
+    if (newQty <= 0) {
+      this.remove(productId);
       return;
     }
 
-    if (diff > 0) {
-      item.product.decreaseStock(diff);
-    } else {
-      item.product.increaseStock(diff * -1);
+    // Validar contra stock total del producto
+    if (newQty > Number(item.product.stock)) {
+      alert("No hay suficiente stock");
+      return;
     }
 
     item.qty = newQty;
   }
 
   clear() {
-    this.items.forEach(item => item.product.increaseStock(item.qty));
+    // ✅ solo vacía carrito (NO devuelve stock, porque nunca lo bajamos aquí)
     this.items = [];
   }
 
