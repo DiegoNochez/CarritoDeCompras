@@ -131,10 +131,10 @@ function toProduct(obj) {
 
 // ---- API pública ----
 function getAllProducts() {
-  // ⚠️ OJO: también copiamos featured al objeto Product
+  //copiamos featured al objeto Product
   const list = CATALOG_DATA.map((raw) => {
     const p = toProduct(raw);
-    p.featured = !!raw.featured; // ✅ añadimos featured al objeto final
+    p.featured = !!raw.featured;
     return p;
   });
   return list;
@@ -159,7 +159,7 @@ function filterByCategory(products, category) {
   return products.filter(p => p.category === category);
 }
 
-// ✅ Nuevo: filtrar solo destacados
+// filtrar solo destacados
 function filterFeatured(products, onlyFeatured) {
   if (!onlyFeatured) return [...products];
   return products.filter(p => p.featured === true);
@@ -187,7 +187,7 @@ function sortProducts(products, sortKey) {
   return list;
 }
 
-// Export “global” (si NO usas módulos)
+// Export “global”
 window.CatalogService = {
   getAllProducts,
   getProductById,

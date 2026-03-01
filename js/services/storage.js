@@ -27,13 +27,6 @@ function loadCart(products) {
     return cart;
   }
 
-  // Para reconstruir sin “doble descuento” de stock:
-  // 1) Restauramos stocks primero (si se guardaron)
-  // 2) Luego agregamos al carrito usando cart.add() (que baja stock)
-
-  // Si tú NO quieres guardar stocks, igual funciona, pero el stock
-  // se recalcula bajándolo de productos base.
-
   data.forEach(row => {
     const p = products.find(x => x.id === row.id);
     if (!p) return;
